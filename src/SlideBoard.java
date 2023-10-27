@@ -7,7 +7,7 @@ public class SlideBoard extends JFrame implements ActionListener {
     GameLayout gameLayout = new GameLayout();
     JPanel frame = new JPanel();
     JLabel top = new JLabel("Välkommen till 15-spel");
-    JButton newGameButton = new JButton("Blanda");
+    JButton shuffleButton = new JButton("Blanda"); //bytte namn på denna
     JPanel a = new JPanel();JPanel b = new JPanel();JPanel c = new JPanel();JPanel d = new JPanel();
     JPanel e = new JPanel();JPanel f = new JPanel();JPanel g = new JPanel();JPanel h = new JPanel();JPanel i = new JPanel();JPanel j = new JPanel();
     JPanel k = new JPanel();JPanel l = new JPanel();JPanel m = new JPanel();JPanel n = new JPanel();JPanel o = new JPanel();JPanel p = new JPanel();
@@ -24,28 +24,30 @@ public class SlideBoard extends JFrame implements ActionListener {
         shuffle();
 
         add(top, BorderLayout.NORTH);
+        gameLayout.setTopLabelLayout(top);
+
         add(frame, BorderLayout.CENTER);
         frame.setLayout(new GridLayout(4, 4));
 
-        //skapar upp och lägger till 16 paneler.
+        //lägger till samtliga paneler
         for (int i = 0; i < 16; i++) {
             frame.add(panels[i]);
         }
 
-        //knapparna läggs till i varsin panel
+        //knapparna läggs till i respektive panel
         for (int i = 0; i<  16; i++) {
             panels[i].add(buttons[i]);
         }
-        add(newGameButton, BorderLayout.SOUTH);
-
-        for (JButton button : buttons) {
-            gameLayout.setNumberButtonLayout(button);
-        }
+        //layout for buttons och panels
         for (JPanel panel : panels) {
             panel.setBackground(gameLayout.getColor2());
         }
-        gameLayout.setTopLabelLayout(top);
-        gameLayout.setNewGameButtonLayout(newGameButton);
+        for (JButton button : buttons) {
+            gameLayout.setNumberButtonLayout(button);
+        }
+        //
+        add(shuffleButton, BorderLayout.SOUTH);
+        gameLayout.setShuffleButtonLayout(shuffleButton);
 
         for (JButton button : buttons) {
             button.addActionListener(this);

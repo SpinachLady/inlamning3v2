@@ -33,7 +33,7 @@ public class GameLayout {
     public Color getColor2 () {
         return color2;
     }
-    public void setNewGameButtonLayout (JButton button) {
+    public void setShuffleButtonLayout (JButton button) {
         button.setBackground(color1);
         button.setFont(regularFont);
     }
