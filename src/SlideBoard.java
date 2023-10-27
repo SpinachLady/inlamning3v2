@@ -4,9 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SlideBoard extends JFrame implements ActionListener {
+    GameLayout gameLayout = new GameLayout();
     JPanel frame = new JPanel();
     JLabel top = new JLabel("Välkommen till 15-spel");
-    JButton newGame = new JButton("Spela igen");
+    JButton newGameButton = new JButton("Blanda");
     JPanel a = new JPanel();JPanel b = new JPanel();JPanel c = new JPanel();JPanel d = new JPanel();
     JPanel e = new JPanel();JPanel f = new JPanel();JPanel g = new JPanel();JPanel h = new JPanel();JPanel i = new JPanel();JPanel j = new JPanel();
     JPanel k = new JPanel();JPanel l = new JPanel();JPanel m = new JPanel();JPanel n = new JPanel();JPanel o = new JPanel();JPanel p = new JPanel();
@@ -31,29 +32,20 @@ public class SlideBoard extends JFrame implements ActionListener {
             frame.add(panels[i]);
         }
 
-        //knapparna läggs till i panelerna (a - p)
-        a.add(buttons[0]);b.add(buttons[1]);c.add(buttons[2]);d.add(buttons[3]);
-        e.add(buttons[4]);f.add(buttons[5]);g.add(buttons[6]);h.add(buttons[7]);
-        i.add(buttons[8]);j.add(buttons[9]);k.add(buttons[10]);l.add(buttons[11]);
-        m.add(buttons[12]);n.add(buttons[13]);o.add(buttons[14]);p.add(buttons[15]);
-        add(newGame, BorderLayout.SOUTH);
+        //knapparna läggs till i varsin panel
+        for (int i = 0; i<  16; i++) {
+            panels[i].add(buttons[i]);
+        }
+        add(newGameButton, BorderLayout.SOUTH);
 
         for (JButton button : buttons) {
-            button.setPreferredSize(new Dimension(50, 50));
-            button.setBackground(new Color(164, 201, 255));
-            button.setFont(new Font ("Roboto", Font.BOLD, 25));
-            button.setMargin(new Insets(2, 2, 2, 2));
+            gameLayout.setNumberButtonLayout(button);
         }
         for (JPanel panel : panels) {
-            panel.setBackground(new Color (164, 255, 185));
+            panel.setBackground(gameLayout.getColor2());
         }
-        newGame.setBackground(new Color(164, 201, 255));
-
-        top.setOpaque(true);
-        top.setBackground(new Color (164, 201, 255));
-        top.setPreferredSize(new Dimension(250, 40));
-        top.setHorizontalAlignment(SwingConstants.CENTER);
-        top.setVerticalAlignment(SwingConstants.CENTER);
+        gameLayout.setTopLabelLayout(top);
+        gameLayout.setNewGameButtonLayout(newGameButton);
 
         for (JButton button : buttons) {
             button.addActionListener(this);
@@ -61,7 +53,7 @@ public class SlideBoard extends JFrame implements ActionListener {
         setVisible(true);
         button16.setVisible(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize (250, 330);
+        setSize (235, 330);
     }
         /* ---------------------------STOPP--------------------------- */
     public void actionPerformed(ActionEvent e) {
