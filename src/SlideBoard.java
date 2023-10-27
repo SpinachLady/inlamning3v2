@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SlideBoard extends JFrame {
+public class SlideBoard extends JFrame implements ActionListener {
     JPanel frame = new JPanel();
     JLabel top = new JLabel("Välkommen till 15-spel");
     JButton newGame = new JButton("Spela igen");
@@ -24,20 +26,79 @@ public class SlideBoard extends JFrame {
         add(frame, BorderLayout.CENTER);
         frame.setLayout(new GridLayout(4, 4));
 
+        //skapar upp och lägger till 16 paneler.
         for (int i = 0; i < 16; i++) {
             frame.add(panels[i]);
         }
 
+        //knapparna lägg till i panelerna (a - p)
         a.add(buttons[0]);b.add(buttons[1]);c.add(buttons[2]);d.add(buttons[3]);
         e.add(buttons[4]);f.add(buttons[5]);g.add(buttons[6]);h.add(buttons[7]);
         i.add(buttons[8]);j.add(buttons[9]);k.add(buttons[10]);l.add(buttons[11]);
         m.add(buttons[12]);n.add(buttons[13]);o.add(buttons[14]);p.add(buttons[15]);
         add(newGame, BorderLayout.SOUTH);
 
+        for (JButton button : buttons) {
+            button.addActionListener(this);
+        }
         setVisible(true);
         button16.setVisible(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        JButton clickedButton = (JButton) e.getSource();
+
+        int indexClickedButton = -1;
+        for (int i = 0; i < buttons.length; i++) {
+            if (buttons[i] == clickedButton) {
+                indexClickedButton = i;
+                break;
+
+
+            }
+        }
+    }
+
+    private int getIndexForEmptySlot() {
+
+        //Kan förenklas. Hitta index till button 16 istället.
+        for (int i = 0; i < buttons.length; i++) {
+            if (!buttons[i].isVisible()) {
+                return i;
+            }
+        }
+        return -1; //Ifall tomma knappen inte hittas, alltså error.
+    }
+    private boolean slotNextToIsEmpty(int indexForClickedButton) {
+        //Kollar om det finns tomt utrymme bredvid den klickade knappen.
+        int indexForEmptySlot = getIndexForEmptySlot();
+
+        /* Division med int avrundar alltid nedåt.
+           Ex: indexForClickedButton = 7
+           buttonRow = 7 / 4
+           buttonRow = 1
+           --> Befinner sig alltså på andra raden (rad 0 är första)
+         */
+        int buttonRow = indexForClickedButton / 4;
+
+        /* Ex: indexForClickedButton = 15
+               buttonCol = 15 % 4
+               buttonCol = 3 --> den klickade knappen finns alltså
+               på column 3.
+         */
+        int buttonCol = indexForClickedButton % 4;
+        int emptyRow = indexForEmptySlot / 4;
+        int emptyCol = indexForEmptySlot % 4;
+
+        //buttonRow - emptyRow är antingen 0 eller 1. buttonCol - emptyCol kommer va det andra.
+        //Därav blir resultatet alltid 1 ifall det finns en tom plats bredvid.
+        return Math.abs(buttonRow - emptyRow) + Math.abs(buttonCol - emptyCol) == 1;
+    }
+
+    private void swap(int indexPushedButton, int indexEmptySlot) {
+
     }
 
     private void shuffle () {
