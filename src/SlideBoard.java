@@ -3,8 +3,9 @@ import java.awt.*;
 
 public class SlideBoard extends JFrame {
     JPanel frame = new JPanel();
-    JLabel top = new JLabel();
-    JButton newGame = new JButton();JPanel a = new JPanel();JPanel b = new JPanel();JPanel c = new JPanel();JPanel d = new JPanel();
+    JLabel top = new JLabel("Välkommen till 15-spel");
+    JButton newGame = new JButton("Spela igen");
+    JPanel a = new JPanel();JPanel b = new JPanel();JPanel c = new JPanel();JPanel d = new JPanel();
     JPanel e = new JPanel();JPanel f = new JPanel();JPanel g = new JPanel();JPanel h = new JPanel();JPanel i = new JPanel();JPanel j = new JPanel();
     JPanel k = new JPanel();JPanel l = new JPanel();JPanel m = new JPanel();JPanel n = new JPanel();JPanel o = new JPanel();JPanel p = new JPanel();
     JButton button1 = new JButton("1");JButton button2 = new JButton("2");JButton button3 = new JButton("3");
@@ -50,5 +51,4 @@ public class SlideBoard extends JFrame {
         }
 
     }
-
 }
