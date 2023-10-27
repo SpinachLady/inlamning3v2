@@ -99,8 +99,17 @@ public class SlideBoard extends JFrame implements ActionListener {
 
     private void swap(int indexPushedButton, int indexEmptySlot) {
 
+        String textPushedButton = buttons[indexPushedButton].getText();
+        buttons[indexPushedButton].setText(null);
+        buttons[indexEmptySlot].setText(textPushedButton);
+
+        buttons[indexPushedButton].setVisible(false);
+        buttons[indexEmptySlot].setVisible(true);
     }
 
+    private void hasWon() {
+
+    }
     private void shuffle () {
         JButton temp;
         for (int i = 0; i < 100; i++) {
