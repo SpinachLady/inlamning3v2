@@ -13,10 +13,9 @@ public class SlideBoard extends JFrame {
     JButton button10 = new JButton("10");JButton button11 = new JButton("11");JButton button12 = new JButton("12");
     JButton button13 = new JButton("13");JButton button14 = new JButton("14");JButton button15 = new JButton("15");
     JButton button16 = new JButton();
-    Object[][] slideBoardContent = {
-            {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p},
-            {button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16}
-    };
+    JButton[] buttons = {button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16};
+
+    JPanel[] panels = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p};
 
     /*public void temp() {
         for(int i = 0; i < 16; i++) {
@@ -29,37 +28,38 @@ public class SlideBoard extends JFrame {
 
 
     public SlideBoard() {
+        shuffle();
+
         add(top, BorderLayout.NORTH);
         add(frame, BorderLayout.CENTER);
         frame.setLayout(new GridLayout(4, 4));
-        for (int i = 0; i < 16; i++) {
-            frame.add((Component) slideBoardContent[0][i]);
-            slideBoardContent[0][i].add((Component )slideBoardContent[1][i]);
-        }
 
+        for (int i = 0; i < 16; i++) {
+            frame.add(panels[i]);
+        }
         /*frame.add(a);frame.add(b);frame.add(c);frame.add(d);frame.add(e);frame.add(f);frame.add(g);frame.add(h);frame.add(i);
         frame.add(j);frame.add(k);frame.add(l);frame.add(m);frame.add(n);frame.add(o);frame.add(p);*/
 
-        a.add(button1);b.add(button2);c.add(button3);d.add(button4);e.add(button5);f.add(button6);g.add(button7);h.add(button8);
-        i.add(button9);j.add(button10);k.add(button11);l.add(button12);m.add(button13);n.add(button14);o.add(button15);p.add(button16);
+        a.add(buttons[0]);b.add(buttons[1]);c.add(buttons[2]);d.add(buttons[3]);
+        e.add(buttons[4]);f.add(buttons[5]);g.add(buttons[6]);h.add(buttons[7]);
+        i.add(buttons[8]);j.add(buttons[9]);k.add(buttons[10]);l.add(buttons[11]);
+        m.add(buttons[12]);n.add(buttons[13]);o.add(buttons[14]);p.add(buttons[15]);
         add(newGame, BorderLayout.SOUTH);
 
         setVisible(true);
         button16.setVisible(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
-
-        shuffle();
     }
 
     private void shuffle () {
-        Object temp;
+        JButton temp;
         for (int i = 0; i < 100; i++) {
             int random = (int) (Math.random() * 15);
             int random2 = (int) (Math.random() * 15);
-            temp = slideBoardContent[1][random];
-            slideBoardContent[1][random] = slideBoardContent[1][random2];
-            slideBoardContent[1][random2] = temp;
+            temp = buttons[random];
+            buttons[random] = buttons[random2];
+            buttons[random2] = temp;
         }
 
     }
