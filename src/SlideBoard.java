@@ -107,7 +107,7 @@ public class SlideBoard extends JFrame implements ActionListener {
         buttons[indexEmptySlot].setVisible(true);
     }
 
-    private void hasWon() {
+    private boolean hasWon() {
 
     }
     private void shuffle () {
