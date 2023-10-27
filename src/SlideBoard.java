@@ -15,20 +15,16 @@ public class SlideBoard extends JFrame {
     JButton button13 = new JButton("13");JButton button14 = new JButton("14");JButton button15 = new JButton("15");
 
     public SlideBoard() {
+
         add(top, BorderLayout.NORTH);
         add(frame, BorderLayout.CENTER);
         frame.setLayout(new GridLayout(4, 4));
-        frame.add(a);frame.add(b);frame.add(c);frame.add(d);frame.add(e);frame.add(f);frame.add(g);frame.add(h);frame.add(i);
-        frame.add(j);frame.add(k);frame.add(l);frame.add(m);frame.add(n);frame.add(o);frame.add(p);
-        a.add(button1);b.add(button2);c.add(button3);d.add(button4);e.add(button5);f.add(button6);g.add(button7);h.add(button8);
-        i.add(button9);j.add(button10);k.add(button11);l.add(button12);m.add(button13);n.add(button14);o.add(button15);
-        add(newGame, BorderLayout.SOUTH);
-
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
+    }
+    private void shuffle() {
 
     }
-
 
 }
