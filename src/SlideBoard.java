@@ -14,18 +14,7 @@ public class SlideBoard extends JFrame {
     JButton button13 = new JButton("13");JButton button14 = new JButton("14");JButton button15 = new JButton("15");
     JButton button16 = new JButton();
     JButton[] buttons = {button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16};
-
     JPanel[] panels = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p};
-
-    /*public void temp() {
-        for(int i = 0; i < 16; i++) {
-            System.out.println(slideBoardContent[0][i].toString());
-        }
-        for (int i = 0; i < 16; i++) {
-            System.out.println(slideBoardContent[1][i]);
-        }
-    } */
-
 
     public SlideBoard() {
         shuffle();
@@ -37,8 +26,6 @@ public class SlideBoard extends JFrame {
         for (int i = 0; i < 16; i++) {
             frame.add(panels[i]);
         }
-        /*frame.add(a);frame.add(b);frame.add(c);frame.add(d);frame.add(e);frame.add(f);frame.add(g);frame.add(h);frame.add(i);
-        frame.add(j);frame.add(k);frame.add(l);frame.add(m);frame.add(n);frame.add(o);frame.add(p);*/
 
         a.add(buttons[0]);b.add(buttons[1]);c.add(buttons[2]);d.add(buttons[3]);
         e.add(buttons[4]);f.add(buttons[5]);g.add(buttons[6]);h.add(buttons[7]);
