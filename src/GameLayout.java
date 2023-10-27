@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class GameLayout {
@@ -9,6 +10,7 @@ public class GameLayout {
     private final Color color2 = new Color (164, 255, 185);
     private final Font numberButtonFont = new Font("Roboto", Font.BOLD, 25);
     private final Font regularFont = new Font("Roboto", Font.PLAIN, 16);
+    private final Border thinBorder = BorderFactory.createLineBorder(Color.black);
 
     public Dimension getNumberButtonSize () {
         return numberButtonSize;
@@ -23,12 +25,14 @@ public class GameLayout {
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.CENTER);
         label.setFont(regularFont);
+        label.setBorder(thinBorder);
     }
     public void setNumberButtonLayout (JButton button) {
         button.setPreferredSize(numberButtonSize);
         button.setBackground(color1);
         button.setFont(numberButtonFont);
         button.setMargin(new Insets(2, 2, 2, 2));
+        button.setBorder(thinBorder);
     }
     public Color getColor2 () {
         return color2;
@@ -36,7 +40,6 @@ public class GameLayout {
     public void setShuffleButtonLayout (JButton button) {
         button.setBackground(color1);
         button.setFont(regularFont);
+        button.setBorder(thinBorder);
     }
-
-
 }
