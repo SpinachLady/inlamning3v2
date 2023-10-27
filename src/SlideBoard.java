@@ -31,7 +31,7 @@ public class SlideBoard extends JFrame implements ActionListener {
             frame.add(panels[i]);
         }
 
-        //knapparna lägg till i panelerna (a - p)
+        //knapparna läggs till i panelerna (a - p)
         a.add(buttons[0]);b.add(buttons[1]);c.add(buttons[2]);d.add(buttons[3]);
         e.add(buttons[4]);f.add(buttons[5]);g.add(buttons[6]);h.add(buttons[7]);
         i.add(buttons[8]);j.add(buttons[9]);k.add(buttons[10]);l.add(buttons[11]);
@@ -39,14 +39,31 @@ public class SlideBoard extends JFrame implements ActionListener {
         add(newGame, BorderLayout.SOUTH);
 
         for (JButton button : buttons) {
+            button.setPreferredSize(new Dimension(50, 50));
+            button.setBackground(new Color(164, 201, 255));
+            button.setFont(new Font ("Roboto", Font.BOLD, 25));
+            button.setMargin(new Insets(2, 2, 2, 2));
+        }
+        for (JPanel panel : panels) {
+            panel.setBackground(new Color (164, 255, 185));
+        }
+        newGame.setBackground(new Color(164, 201, 255));
+
+        top.setOpaque(true);
+        top.setBackground(new Color (164, 201, 255));
+        top.setPreferredSize(new Dimension(250, 40));
+        top.setHorizontalAlignment(SwingConstants.CENTER);
+        top.setVerticalAlignment(SwingConstants.CENTER);
+
+        for (JButton button : buttons) {
             button.addActionListener(this);
         }
         setVisible(true);
         button16.setVisible(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        pack();
+        setSize (250, 330);
     }
-
+        /* ---------------------------STOPP--------------------------- */
     public void actionPerformed(ActionEvent e) {
         JButton clickedButton = (JButton) e.getSource();
 
