@@ -164,7 +164,7 @@ public class SlideBoard extends JFrame implements ActionListener {
             JPanel panel = panels[i];
             JButton button = buttons[i];
             String s = Integer.toString(i + 1);
-            if (!(button.getText().equals(s))) {
+            if (!(button.getText().strip().equals(s))) {
                 return false;
             }
         }
@@ -185,6 +185,17 @@ public class SlideBoard extends JFrame implements ActionListener {
     private void shuffleToTestWinning() {
         /* Lägg in tomma rutan på plats 15 och byt plats
            med knapp "15" som befinner sig på plats sexton. */
-
+        for (int i = 0; i < panels.length; i++) {
+            JPanel panel = panels[i];
+            JButton button = buttons[i];
+            String s = Integer.toString(i + 1);
+            if (i == 14) {
+                button.setText(null);
+            } else if (i == 15) {
+                button.setText("15");
+            } else {
+                button.setText(s);
+            }
+        }
     }
 }
