@@ -57,7 +57,6 @@ public class SlideBoard extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize (235, 330);
     }
-        /* ---------------------------STOPP--------------------------- */
     public void actionPerformed(ActionEvent e) {
         JButton clickedButton = (JButton) e.getSource();
 
