@@ -188,13 +188,13 @@ public class SlideBoard extends JFrame implements ActionListener {
         for (int i = 0; i < panels.length; i++) {
             JPanel panel = panels[i];
             JButton button = buttons[i];
-            String s = Integer.toString(i + 1);
+            String string = Integer.toString(i + 1);
             if (i == 14) {
                 button.setText(null);
             } else if (i == 15) {
                 button.setText("15");
             } else {
-                button.setText(s);
+                button.setText(string);
             }
         }
     }
