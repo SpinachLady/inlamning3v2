@@ -2,12 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class SlideBoard extends JFrame implements ActionListener {
     GameLayout gameLayout = new GameLayout();
     JPanel frame = new JPanel();
     JLabel top = new JLabel("Välkommen till 15-spel");
-    JButton shuffleButton = new JButton("Blanda"); //bytte namn på denna
+    JButton newGameButton = new JButton("Nytt spel");
     JPanel a = new JPanel();JPanel b = new JPanel();JPanel c = new JPanel();JPanel d = new JPanel();
     JPanel e = new JPanel();JPanel f = new JPanel();JPanel g = new JPanel();JPanel h = new JPanel();JPanel i = new JPanel();JPanel j = new JPanel();
     JPanel k = new JPanel();JPanel l = new JPanel();JPanel m = new JPanel();JPanel n = new JPanel();JPanel o = new JPanel();JPanel p = new JPanel();
@@ -18,11 +19,17 @@ public class SlideBoard extends JFrame implements ActionListener {
     JButton button13 = new JButton("13");JButton button14 = new JButton("14");JButton button15 = new JButton("15");
     JButton button16 = new JButton();
     JButton[] buttons = {button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16};
+    JButton[] buttonsInRightOrder = Arrays.copyOf(buttons, buttons.length);
     JPanel[] panels = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p};
-
+    boolean isTest = true;
     public SlideBoard() {
-        shuffle();
-
+        if (isTest) {
+            buttons = Arrays.copyOf(buttonsInRightOrder, buttonsInRightOrder.length);
+            swap(14, 15);
+        }
+        else {
+            shuffle();
+        }
         add(top, BorderLayout.NORTH);
         gameLayout.setTopLabelLayout(top);
 
@@ -45,17 +52,19 @@ public class SlideBoard extends JFrame implements ActionListener {
         for (JButton button : buttons) {
             gameLayout.setNumberButtonLayout(button);
         }
-        //
-        add(shuffleButton, BorderLayout.SOUTH);
-        gameLayout.setShuffleButtonLayout(shuffleButton);
+
+        add(newGameButton, BorderLayout.SOUTH);
+        gameLayout.setShuffleButtonLayout(newGameButton);
 
         for (JButton button : buttons) {
             button.addActionListener(this);
         }
         setVisible(true);
         button16.setVisible(false);
+        newGameButton.setVisible(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize (235, 330);
+
     }
     public void actionPerformed(ActionEvent e) {
         JButton clickedButton = (JButton) e.getSource();
@@ -75,6 +84,7 @@ public class SlideBoard extends JFrame implements ActionListener {
                 swap(indexClickedButton, indexForEmptySlot);
                 if (hasWon()) {
                     top.setText("GRATTIS DU VANN!");
+                    newGameButton.setVisible(true);
                     /* Kanske vore kul att ändra bakgrundsfärgen?
                        Är det möjligt att bakgrunden byter färg
                        för att få lite av en "confetti effekt"? */
@@ -84,10 +94,8 @@ public class SlideBoard extends JFrame implements ActionListener {
     }
 
     private int getIndexForEmptySlot() {
-
-        //Kan förenklas. Hitta index till button 16 istället.
         for (int i = 0; i < buttons.length; i++) {
-            if (!buttons[i].isVisible()) {
+            if (buttons[i] == button16) {
                 return i;
             }
         }
@@ -121,25 +129,26 @@ public class SlideBoard extends JFrame implements ActionListener {
     }
 
     private void swap(int indexPushedButton, int indexEmptySlot) {
+        for (int i = 0; i<buttons.length; i++) {
+            panels[i].removeAll();
+            panels[i].revalidate();
+            panels[i].repaint();
+        }
+        JButton temp = buttons[indexPushedButton];
+        buttons[indexPushedButton] = button16;
+        buttons[indexEmptySlot] = temp;
+        for (int i = 0; i<  16; i++) {
+            panels[i].add(buttons[i]);
+        }
 
-        String textPushedButton = buttons[indexPushedButton].getText();
-        buttons[indexPushedButton].setText(null);
-        buttons[indexEmptySlot].setText(textPushedButton);
-
-        buttons[indexPushedButton].setVisible(false);
-        buttons[indexEmptySlot].setVisible(true);
     }
 
     private boolean hasWon() {
         /* Måste den tomma rutan vara på sista platsen för att
            det ska räknas som att man vunnit?
          */
-
-        for (int i = 0; i < panels.length; i++) {
-            JPanel panel = panels[i];
-            JButton button = buttons[i];
-            String s = Integer.toString(i + 1);
-            if (!(button.getText().strip().equals(s))) {
+        for (int i = 0; i<buttons.length; i++) {
+            if (!buttons[i].equals(buttonsInRightOrder[i])) {
                 return false;
             }
         }
@@ -151,26 +160,10 @@ public class SlideBoard extends JFrame implements ActionListener {
         for (int i = 0; i < 100; i++) {
             int random = (int) (Math.random() * 15);
             int random2 = (int) (Math.random() * 15);
-            temp = buttons[random];
-            buttons[random] = buttons[random2];
+            temp = buttons [random];
+            buttons[random] = buttons [random2];
             buttons[random2] = temp;
         }
     }
 
-    private void shuffleToTestWinning() {
-        /* Lägg in tomma rutan på plats 15 och byt plats
-           med knapp "15" som befinner sig på plats sexton. */
-        for (int i = 0; i < panels.length; i++) {
-            JPanel panel = panels[i];
-            JButton button = buttons[i];
-            String string = Integer.toString(i + 1);
-            if (i == 14) {
-                button.setText(null);
-            } else if (i == 15) {
-                button.setText("15");
-            } else {
-                button.setText(string);
-            }
-        }
-    }
 }
