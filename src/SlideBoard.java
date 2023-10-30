@@ -4,40 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SlideBoard extends JFrame implements ActionListener {
+    GameLayout gameLayout = new GameLayout();
     JPanel frame = new JPanel();
     JLabel top = new JLabel("Välkommen till 15-spel");
-    JButton newGame = new JButton("Spela igen");
-    JPanel a = new JPanel();
-    JPanel b = new JPanel();
-    JPanel c = new JPanel();
-    JPanel d = new JPanel();
-    JPanel e = new JPanel();
-    JPanel f = new JPanel();
-    JPanel g = new JPanel();
-    JPanel h = new JPanel();
-    JPanel i = new JPanel();
-    JPanel j = new JPanel();
-    JPanel k = new JPanel();
-    JPanel l = new JPanel();
-    JPanel m = new JPanel();
-    JPanel n = new JPanel();
-    JPanel o = new JPanel();
-    JPanel p = new JPanel();
-    JButton button1 = new JButton("1");
-    JButton button2 = new JButton("2");
-    JButton button3 = new JButton("3");
-    JButton button4 = new JButton("4");
-    JButton button5 = new JButton("5");
-    JButton button6 = new JButton("6");
-    JButton button7 = new JButton("7");
-    JButton button8 = new JButton("8");
-    JButton button9 = new JButton("9");
-    JButton button10 = new JButton("10");
-    JButton button11 = new JButton("11");
-    JButton button12 = new JButton("12");
-    JButton button13 = new JButton("13");
-    JButton button14 = new JButton("14");
-    JButton button15 = new JButton("15");
+    JButton shuffleButton = new JButton("Blanda"); //bytte namn på denna
+    JPanel a = new JPanel();JPanel b = new JPanel();JPanel c = new JPanel();JPanel d = new JPanel();
+    JPanel e = new JPanel();JPanel f = new JPanel();JPanel g = new JPanel();JPanel h = new JPanel();JPanel i = new JPanel();JPanel j = new JPanel();
+    JPanel k = new JPanel();JPanel l = new JPanel();JPanel m = new JPanel();JPanel n = new JPanel();JPanel o = new JPanel();JPanel p = new JPanel();
+    JButton button1 = new JButton("1");JButton button2 = new JButton("2");JButton button3 = new JButton("3");
+    JButton button4 = new JButton("4");JButton button5 = new JButton("5");JButton button6 = new JButton("6");
+    JButton button7 = new JButton("7");JButton button8 = new JButton("8");JButton button9 = new JButton("9");
+    JButton button10 = new JButton("10");JButton button11 = new JButton("11");JButton button12 = new JButton("12");
+    JButton button13 = new JButton("13");JButton button14 = new JButton("14");JButton button15 = new JButton("15");
     JButton button16 = new JButton();
     JButton[] buttons = {button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16};
     JPanel[] panels = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p};
@@ -46,32 +24,30 @@ public class SlideBoard extends JFrame implements ActionListener {
         shuffle();
 
         add(top, BorderLayout.NORTH);
+        gameLayout.setTopLabelLayout(top);
+
         add(frame, BorderLayout.CENTER);
         frame.setLayout(new GridLayout(4, 4));
 
-        //skapar upp och lägger till 16 paneler.
+        //lägger till samtliga paneler
         for (int i = 0; i < 16; i++) {
             frame.add(panels[i]);
         }
 
-        //knapparna läggs till i panelerna (a - p)
-        a.add(buttons[0]);
-        b.add(buttons[1]);
-        c.add(buttons[2]);
-        d.add(buttons[3]);
-        e.add(buttons[4]);
-        f.add(buttons[5]);
-        g.add(buttons[6]);
-        h.add(buttons[7]);
-        i.add(buttons[8]);
-        j.add(buttons[9]);
-        k.add(buttons[10]);
-        l.add(buttons[11]);
-        m.add(buttons[12]);
-        n.add(buttons[13]);
-        o.add(buttons[14]);
-        p.add(buttons[15]);
-        add(newGame, BorderLayout.SOUTH);
+        //knapparna läggs till i respektive panel
+        for (int i = 0; i<  16; i++) {
+            panels[i].add(buttons[i]);
+        }
+        //layout for buttons och panels
+        for (JPanel panel : panels) {
+            panel.setBackground(gameLayout.getColor2());
+        }
+        for (JButton button : buttons) {
+            gameLayout.setNumberButtonLayout(button);
+        }
+        //
+        add(shuffleButton, BorderLayout.SOUTH);
+        gameLayout.setShuffleButtonLayout(shuffleButton);
 
         for (JButton button : buttons) {
             button.addActionListener(this);
@@ -79,9 +55,8 @@ public class SlideBoard extends JFrame implements ActionListener {
         setVisible(true);
         button16.setVisible(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        pack();
+        setSize (235, 330);
     }
-
     public void actionPerformed(ActionEvent e) {
         JButton clickedButton = (JButton) e.getSource();
 
