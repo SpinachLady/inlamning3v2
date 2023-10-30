@@ -105,9 +105,6 @@ public class SlideBoard extends JFrame implements ActionListener {
                 if (hasWon()) {
                     top.setText("GRATTIS DU VANN!");
                     newGameButton.setVisible(true);
-                    /* Kanske vore kul att ändra bakgrundsfärgen?
-                       Är det möjligt att bakgrunden byter färg
-                       för att få lite av en "confetti effekt"? */
                 }
             }
         }
