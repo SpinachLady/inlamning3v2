@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        SlideBoard test = new SlideBoard();
+
+            SlideBoard test = new SlideBoard();
 
     }
 }

@@ -23,6 +23,16 @@ public class SlideBoard extends JFrame implements ActionListener {
     JPanel[] panels = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p};
     boolean isTest = true;
     public SlideBoard() {
+
+        class startNewGameListener implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                top.setText("Välkommen till 15-spel");
+                newGameButton.setVisible(false);
+                shuffle();
+            }
+        }
+
         if (isTest) {
             buttons = Arrays.copyOf(buttonsInRightOrder, buttonsInRightOrder.length);
             swap(14, 15);
@@ -59,12 +69,14 @@ public class SlideBoard extends JFrame implements ActionListener {
         for (JButton button : buttons) {
             button.addActionListener(this);
         }
+
+        newGameButton.addActionListener(new startNewGameListener());
+
         setVisible(true);
         button16.setVisible(false);
         newGameButton.setVisible(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize (235, 330);
-
     }
     public void actionPerformed(ActionEvent e) {
         JButton clickedButton = (JButton) e.getSource();
