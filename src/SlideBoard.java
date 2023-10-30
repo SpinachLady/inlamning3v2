@@ -29,7 +29,15 @@ public class SlideBoard extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 top.setText("Välkommen till 15-spel");
                 newGameButton.setVisible(false);
+                for (int i = 0; i<buttons.length; i++) {
+                    panels[i].removeAll();
+                    panels[i].revalidate();
+                    panels[i].repaint();
+                }
                 shuffle();
+                for (int i = 0; i<  16; i++) {
+                    panels[i].add(buttons[i]);
+                }
             }
         }
 
