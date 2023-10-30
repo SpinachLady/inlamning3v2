@@ -29,15 +29,9 @@ public class SlideBoard extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 top.setText("Välkommen till 15-spel");
                 newGameButton.setVisible(false);
-                for (int i = 0; i<buttons.length; i++) {
-                    panels[i].removeAll();
-                    panels[i].revalidate();
-                    panels[i].repaint();
-                }
+                removeButtonsFromPanels();
                 shuffle();
-                for (int i = 0; i<  16; i++) {
-                    panels[i].add(buttons[i]);
-                }
+                addButtonsToPanels();
             }
         }
 
@@ -60,9 +54,7 @@ public class SlideBoard extends JFrame implements ActionListener {
         }
 
         //knapparna läggs till i respektive panel
-        for (int i = 0; i<  16; i++) {
-            panels[i].add(buttons[i]);
-        }
+        addButtonsToPanels();
         //layout for buttons och panels
         for (JPanel panel : panels) {
             panel.setBackground(gameLayout.getColor2());
@@ -149,17 +141,11 @@ public class SlideBoard extends JFrame implements ActionListener {
     }
 
     private void swap(int indexPushedButton, int indexEmptySlot) {
-        for (int i = 0; i<buttons.length; i++) {
-            panels[i].removeAll();
-            panels[i].revalidate();
-            panels[i].repaint();
-        }
+        removeButtonsFromPanels();
         JButton temp = buttons[indexPushedButton];
         buttons[indexPushedButton] = button16;
         buttons[indexEmptySlot] = temp;
-        for (int i = 0; i<  16; i++) {
-            panels[i].add(buttons[i]);
-        }
+        addButtonsToPanels();
 
     }
 
@@ -173,6 +159,18 @@ public class SlideBoard extends JFrame implements ActionListener {
             }
         }
         return true;
+    }
+    private void addButtonsToPanels () {
+        for (int i = 0; i<  16; i++) {
+            panels[i].add(buttons[i]);
+        }
+    }
+    private void removeButtonsFromPanels () {
+        for (int i = 0; i<buttons.length; i++) {
+            panels[i].removeAll();
+            panels[i].revalidate();
+            panels[i].repaint();
+        }
     }
 
     private void shuffle() {
