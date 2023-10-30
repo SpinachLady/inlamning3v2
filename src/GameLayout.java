@@ -6,12 +6,9 @@ public class GameLayout {
 
     private final Dimension numberButtonSize = new Dimension(50, 50);
     private final Dimension labelSize = new Dimension(250, 40);
-    private final Color color1 = new Color(164, 201, 255);
-    private final Color color2 = new Color (164, 255, 185);
+
     private final Color grey = new Color(207, 209, 212);
     private final Color pink = new Color(247, 190, 220);
-    private final Color green = new Color(240, 229, 177);
-    private final Color blue = new Color(197, 219, 250);
     private final Font numberButtonFont = new Font("Roboto", Font.BOLD, 25);
     private final Font regularFont = new Font("Roboto", Font.PLAIN, 16);
     private final Border thinBorder = BorderFactory.createLineBorder(Color.black, 2);
