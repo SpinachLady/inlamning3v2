@@ -152,7 +152,6 @@ public class SlideBoard extends JFrame implements ActionListener {
         for (int i = 0; i<  16; i++) {
             panels[i].add(buttons[i]);
         }
-
     }
 
     private boolean hasWon() {
