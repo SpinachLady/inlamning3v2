@@ -16,7 +16,7 @@ public class SlideBoard extends JFrame implements ActionListener {
     JButton button7 = new JButton("7");JButton button8 = new JButton("8");JButton button9 = new JButton("9");
     JButton button10 = new JButton("10");JButton button11 = new JButton("11");JButton button12 = new JButton("12");
     JButton button13 = new JButton("13");JButton button14 = new JButton("14");JButton button15 = new JButton("15");
-    JButton button16 = new JButton();
+    JButton button16 = new JButton("");
     JButton[] buttons = {button1, button2, button3, button4, button5, button6, button7, button8, button9, button10, button11, button12, button13, button14, button15, button16};
     JPanel[] panels = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p};
 
@@ -123,7 +123,7 @@ public class SlideBoard extends JFrame implements ActionListener {
     private void swap(int indexPushedButton, int indexEmptySlot) {
 
         String textPushedButton = buttons[indexPushedButton].getText();
-        buttons[indexPushedButton].setText(null);
+        buttons[indexPushedButton].setText("");
         buttons[indexEmptySlot].setText(textPushedButton);
 
         buttons[indexPushedButton].setVisible(false);
@@ -157,7 +157,7 @@ public class SlideBoard extends JFrame implements ActionListener {
         }
     }
 
-    private void shuffleToTestWinning() {
+    public void shuffleToTestWinning() {
         /* Lägg in tomma rutan på plats 15 och byt plats
            med knapp "15" som befinner sig på plats sexton. */
         for (int i = 0; i < panels.length; i++) {
@@ -165,7 +165,7 @@ public class SlideBoard extends JFrame implements ActionListener {
             JButton button = buttons[i];
             String string = Integer.toString(i + 1);
             if (i == 14) {
-                button.setText(null);
+                button.setText("");
             } else if (i == 15) {
                 button.setText("15");
             } else {

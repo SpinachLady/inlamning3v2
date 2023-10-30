@@ -8,9 +8,13 @@ public class GameLayout {
     private final Dimension labelSize = new Dimension(250, 40);
     private final Color color1 = new Color(164, 201, 255);
     private final Color color2 = new Color (164, 255, 185);
+    private final Color grey = new Color(207, 209, 212);
+    private final Color pink = new Color(247, 190, 220);
+    private final Color green = new Color(240, 229, 177);
+    private final Color blue = new Color(197, 219, 250);
     private final Font numberButtonFont = new Font("Roboto", Font.BOLD, 25);
     private final Font regularFont = new Font("Roboto", Font.PLAIN, 16);
-    private final Border thinBorder = BorderFactory.createLineBorder(Color.black);
+    private final Border thinBorder = BorderFactory.createLineBorder(Color.black, 2);
 
     public Dimension getNumberButtonSize () {
         return numberButtonSize;
@@ -20,7 +24,7 @@ public class GameLayout {
     }
     public void setTopLabelLayout (JLabel label) {
         label.setOpaque(true);
-        label.setBackground(color1);
+        label.setBackground(grey);
         label.setPreferredSize(labelSize);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.CENTER);
@@ -29,16 +33,16 @@ public class GameLayout {
     }
     public void setNumberButtonLayout (JButton button) {
         button.setPreferredSize(numberButtonSize);
-        button.setBackground(color1);
+        button.setBackground(Color.white);
         button.setFont(numberButtonFont);
         button.setMargin(new Insets(2, 2, 2, 2));
         button.setBorder(thinBorder);
     }
     public Color getColor2 () {
-        return color2;
+        return pink;
     }
     public void setShuffleButtonLayout (JButton button) {
-        button.setBackground(color1);
+        button.setBackground(grey);
         button.setFont(regularFont);
         button.setBorder(thinBorder);
     }
