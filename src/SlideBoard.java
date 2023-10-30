@@ -21,7 +21,7 @@ public class SlideBoard extends JFrame implements ActionListener {
     JPanel[] panels = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p};
 
     public SlideBoard() {
-        shuffle();
+        //shuffle();
 
         add(top, BorderLayout.NORTH);
         gameLayout.setTopLabelLayout(top);
@@ -121,13 +121,25 @@ public class SlideBoard extends JFrame implements ActionListener {
     }
 
     private void swap(int indexPushedButton, int indexEmptySlot) {
-
+/*          GAMMALT
         String textPushedButton = buttons[indexPushedButton].getText();
         buttons[indexPushedButton].setText("");
         buttons[indexEmptySlot].setText(textPushedButton);
 
         buttons[indexPushedButton].setVisible(false);
         buttons[indexEmptySlot].setVisible(true);
+
+ */
+
+        JPanel panelPushedButton = panels[indexPushedButton];
+        JPanel panelEmptySlot = panels[indexEmptySlot];
+
+        panelPushedButton.removeAll(); //tar detta bort bara knappen?
+        panelEmptySlot.removeAll();
+
+        panelPushedButton.add(buttons[indexEmptySlot]);
+        panelEmptySlot.add(buttons[indexPushedButton]);
+        //Måste GUI uppdateras efter ett sånt här byte?
     }
 
     private boolean hasWon() {
@@ -158,11 +170,26 @@ public class SlideBoard extends JFrame implements ActionListener {
     }
 
     public void shuffleToTestWinning() {
-        /* Lägg in tomma rutan på plats 15 och byt plats
-           med knapp "15" som befinner sig på plats sexton. */
+        /* Lägg in button16 i panel o istället för p,
+           och button15 i panel p istället för o.
+
+           GLÖM EJ! shuffle() måste kommenteras bort i
+           konstruktorn när denna metod körs */
+
+        JPanel panel = panels[15];
+        JPanel panel2 = panels[14];
+
+        panel.removeAll();
+        panel2.removeAll();
+
+        panel.add(buttons[14]);
+        panel2.add(buttons[15]);
+
+        /* GAMMALT
         for (int i = 0; i < panels.length; i++) {
             JPanel panel = panels[i];
             JButton button = buttons[i];
+
             String string = Integer.toString(i + 1);
             if (i == 14) {
                 button.setText("");
@@ -172,5 +199,7 @@ public class SlideBoard extends JFrame implements ActionListener {
                 button.setText(string);
             }
         }
+         */
+
     }
 }
