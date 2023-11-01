@@ -8,6 +8,7 @@ public class SlideBoard extends JFrame {
     GameLayout gameLayout = new GameLayout();
     JPanel frame = new JPanel();
     String heading = "FEMTONSPEL";
+    String grattisMessage = "GRATTIS DU VANN!";
     JLabel top = new JLabel(heading);
     JButton newGameButton = new JButton("NYTT SPEL");
     JPanel a = new JPanel();JPanel b = new JPanel();JPanel c = new JPanel();JPanel d = new JPanel();
@@ -99,7 +100,7 @@ public class SlideBoard extends JFrame {
                 if (indexForEmptySlot != -1) {
                     swap(indexClickedButton, indexForEmptySlot);
                     if (hasWon()) {
-                        top.setText("GRATTIS DU VANN!");
+                        top.setText(grattisMessage);
                         newGameButton.setVisible(true);
                     }
                 }
