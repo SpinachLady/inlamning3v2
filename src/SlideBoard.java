@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class SlideBoard extends JFrame {
     GameLayout gameLayout = new GameLayout();
     JPanel frame = new JPanel();
-    String heading = "VÄLKOMMEN TILL FEMTONSPEL";
+    String heading = "FEMTONSPEL";
     JLabel top = new JLabel(heading);
     JButton newGameButton = new JButton("NYTT SPEL");
     JPanel a = new JPanel();JPanel b = new JPanel();JPanel c = new JPanel();JPanel d = new JPanel();
@@ -117,22 +117,19 @@ public class SlideBoard extends JFrame {
     }
 
     private boolean slotNextToIsEmpty(int indexForClickedButton) {
-        //Kollar om det finns tomt utrymme bredvid den klickade knappen.
         int indexForEmptySlot = getIndexForEmptySlot();
 
         /* Division med int avrundar alltid nedåt.
            Ex: indexForClickedButton = 7
            buttonRow = 7 / 4
            buttonRow = 1
-           --> Befinner sig alltså på andra raden (rad 0 är första)
-         */
+           --> Befinner sig alltså på andra raden (rad 0 är första) */
         int buttonRow = indexForClickedButton / 4;
 
         /* Ex: indexForClickedButton = 15
                buttonCol = 15 % 4
                buttonCol = 3 --> den klickade knappen finns alltså
-               på column 3.
-         */
+               på column 3. */
         int buttonCol = indexForClickedButton % 4;
         int emptyRow = indexForEmptySlot / 4;
         int emptyCol = indexForEmptySlot % 4;
