@@ -7,8 +7,9 @@ import java.util.Arrays;
 public class SlideBoard extends JFrame implements ActionListener {
     GameLayout gameLayout = new GameLayout();
     JPanel frame = new JPanel();
-    JLabel top = new JLabel("Välkommen till 15-spel");
-    JButton newGameButton = new JButton("Nytt spel");
+    String heading = "VÄLKOMMEN TILL FEMTONSPEL";
+    JLabel top = new JLabel(heading);
+    JButton newGameButton = new JButton("NYTT SPEL");
     JPanel a = new JPanel();JPanel b = new JPanel();JPanel c = new JPanel();JPanel d = new JPanel();
     JPanel e = new JPanel();JPanel f = new JPanel();JPanel g = new JPanel();JPanel h = new JPanel();JPanel i = new JPanel();JPanel j = new JPanel();
     JPanel k = new JPanel();JPanel l = new JPanel();JPanel m = new JPanel();JPanel n = new JPanel();JPanel o = new JPanel();JPanel p = new JPanel();
@@ -27,13 +28,13 @@ public class SlideBoard extends JFrame implements ActionListener {
         class startNewGameListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
-                top.setText("Välkommen till 15-spel");
+                top.setText(heading);
                 newGameButton.setVisible(false);
                 removeButtonsFromPanels();
                 shuffle();
                 addButtonsToPanels();
             }
-        }
+        };
 
         if (isTest) {
             buttons = Arrays.copyOf(buttonsInRightOrder, buttonsInRightOrder.length);
@@ -57,7 +58,7 @@ public class SlideBoard extends JFrame implements ActionListener {
         addButtonsToPanels();
         //layout for buttons och panels
         for (JPanel panel : panels) {
-            panel.setBackground(gameLayout.getColor2());
+            panel.setBackground(gameLayout.getPinkColor());
         }
         for (JButton button : buttons) {
             gameLayout.setNumberButtonLayout(button);
@@ -76,7 +77,7 @@ public class SlideBoard extends JFrame implements ActionListener {
         button16.setVisible(false);
         newGameButton.setVisible(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize (235, 330);
+        setSize (600, 600);
     }
     public void actionPerformed(ActionEvent e) {
         JButton clickedButton = (JButton) e.getSource();
@@ -97,9 +98,6 @@ public class SlideBoard extends JFrame implements ActionListener {
                 if (hasWon()) {
                     top.setText("GRATTIS DU VANN!");
                     newGameButton.setVisible(true);
-                    /* Kanske vore kul att ändra bakgrundsfärgen?
-                       Är det möjligt att bakgrunden byter färg
-                       för att få lite av en "confetti effekt"? */
                 }
             }
         }
@@ -150,9 +148,6 @@ public class SlideBoard extends JFrame implements ActionListener {
     }
 
     private boolean hasWon() {
-        /* Måste den tomma rutan vara på sista platsen för att
-           det ska räknas som att man vunnit?
-         */
         for (int i = 0; i<buttons.length; i++) {
             if (!buttons[i].equals(buttonsInRightOrder[i])) {
                 return false;
