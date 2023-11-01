@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
-public class SlideBoard extends JFrame implements ActionListener {
+public class SlideBoard extends JFrame {
     GameLayout gameLayout = new GameLayout();
     JPanel frame = new JPanel();
     String heading = "VÄLKOMMEN TILL FEMTONSPEL";
@@ -23,40 +23,31 @@ public class SlideBoard extends JFrame implements ActionListener {
     JButton[] buttonsInRightOrder = Arrays.copyOf(buttons, buttons.length);
     JPanel[] panels = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p};
     boolean isTest = true;
-    public SlideBoard() {
 
-        class startNewGameListener implements ActionListener {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                top.setText(heading);
-                newGameButton.setVisible(false);
-                removeButtonsFromPanels();
-                shuffle();
-                addButtonsToPanels();
-            }
-        };
+
+    public SlideBoard() {
 
         if (isTest) {
             buttons = Arrays.copyOf(buttonsInRightOrder, buttonsInRightOrder.length);
             swap(14, 15);
-        }
-        else {
+        } else {
             shuffle();
         }
+
         add(top, BorderLayout.NORTH);
-        gameLayout.setTopLabelLayout(top);
-
         add(frame, BorderLayout.CENTER);
+        add(newGameButton, BorderLayout.SOUTH);
+        gameLayout.setTopLabelLayout(top);
         frame.setLayout(new GridLayout(4, 4));
+        gameLayout.setShuffleButtonLayout(newGameButton);
 
-        //lägger till samtliga paneler
+        //PANELER & KNAPPAR LÄGGS TILL
         for (int i = 0; i < 16; i++) {
             frame.add(panels[i]);
         }
-
-        //knapparna läggs till i respektive panel
         addButtonsToPanels();
-        //layout for buttons och panels
+
+        //STYLING
         for (JPanel panel : panels) {
             panel.setBackground(gameLayout.getPinkColor());
         }
@@ -64,13 +55,10 @@ public class SlideBoard extends JFrame implements ActionListener {
             gameLayout.setNumberButtonLayout(button);
         }
 
-        add(newGameButton, BorderLayout.SOUTH);
-        gameLayout.setShuffleButtonLayout(newGameButton);
-
+        //ACTION LISTENERS LÄGGS TILL
         for (JButton button : buttons) {
-            button.addActionListener(this);
+            button.addActionListener(new makeMoveListener());
         }
-
         newGameButton.addActionListener(new startNewGameListener());
 
         setVisible(true);
@@ -79,25 +67,41 @@ public class SlideBoard extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize (600, 600);
     }
-    public void actionPerformed(ActionEvent e) {
-        JButton clickedButton = (JButton) e.getSource();
 
-        int indexClickedButton = -1;
-        for (int i = 0; i < buttons.length; i++) {
-            if (buttons[i] == clickedButton) {
-                indexClickedButton = i;
-                break;
-            }
+
+    class startNewGameListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            top.setText(heading);
+            newGameButton.setVisible(false);
+            removeButtonsFromPanels();
+            shuffle();
+            addButtonsToPanels();
         }
+    };
 
-        boolean clickedButtonHasEmptySlotBesides = slotNextToIsEmpty(indexClickedButton);
-        if (clickedButtonHasEmptySlotBesides) {
-            int indexForEmptySlot = getIndexForEmptySlot();
-            if (indexForEmptySlot != -1) {
-                swap(indexClickedButton, indexForEmptySlot);
-                if (hasWon()) {
-                    top.setText("GRATTIS DU VANN!");
-                    newGameButton.setVisible(true);
+    class makeMoveListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JButton clickedButton = (JButton) e.getSource();
+
+            int indexClickedButton = -1;
+            for (int i = 0; i < buttons.length; i++) {
+                if (buttons[i] == clickedButton) {
+                    indexClickedButton = i;
+                    break;
+                }
+            }
+
+            boolean clickedButtonHasEmptySlotBesides = slotNextToIsEmpty(indexClickedButton);
+            if (clickedButtonHasEmptySlotBesides) {
+                int indexForEmptySlot = getIndexForEmptySlot();
+                if (indexForEmptySlot != -1) {
+                    swap(indexClickedButton, indexForEmptySlot);
+                    if (hasWon()) {
+                        top.setText("GRATTIS DU VANN!");
+                        newGameButton.setVisible(true);
+                    }
                 }
             }
         }
@@ -155,11 +159,13 @@ public class SlideBoard extends JFrame implements ActionListener {
         }
         return true;
     }
+
     private void addButtonsToPanels () {
         for (int i = 0; i<  16; i++) {
             panels[i].add(buttons[i]);
         }
     }
+
     private void removeButtonsFromPanels () {
         for (int i = 0; i<buttons.length; i++) {
             panels[i].removeAll();
