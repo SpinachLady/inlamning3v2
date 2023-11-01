@@ -66,7 +66,7 @@ public class SlideBoard extends JFrame {
         button16.setVisible(false);
         newGameButton.setVisible(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize (600, 600);
+        setSize (530, 600);
     }
 
 
